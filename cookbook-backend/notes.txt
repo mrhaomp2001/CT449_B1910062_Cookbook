@@ -1,7 +1,7 @@
 Các bước thực hiện thêm apis:
  1. thêm model
  2. thêm Service
- 3. thêm controller
+ 3. thêm controller (Sửa các trường dữ liệu)
  4. đăng ký router
 
 Service:
