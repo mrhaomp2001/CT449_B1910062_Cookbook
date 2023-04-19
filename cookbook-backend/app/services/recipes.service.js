@@ -1,5 +1,6 @@
 const models = require('../models');
 const model = models.recipe;
+const Ingredient = models.ingredient;
 const { ObjectId } = require('mongodb');
 
 exports.create = async (data) => {
@@ -17,7 +18,14 @@ exports.create = async (data) => {
 }
 
 exports.find = async () => {
-  const document = await model.find({});
+  const document = await model.find({}).populate({
+    path: "ingredient_details", // Tên trường liên quan trong Recipe model
+    populate:
+    {
+      path: "id_ingredient",
+      model: Ingredient,
+    },
+  });
   return document;
 }
 
@@ -49,14 +57,14 @@ exports.update = async (id, payload) => {
   return result;
 }
 
-exports.delete = async(id) => {
+exports.delete = async (id) => {
   const result = await model.findOneAndDelete({
     _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
   });
   return result;
 }
 
-exports.deleteAll = async() => {
+exports.deleteAll = async () => {
   const result = await model.deleteMany({});
   return result;
 }
