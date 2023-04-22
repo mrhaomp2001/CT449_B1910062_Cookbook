@@ -16,5 +16,4 @@ const IngredientDetailsSchema = new Schema({
   },
 });
 
-
 module.exports = mongoose.model("ingredient_details", IngredientDetailsSchema);

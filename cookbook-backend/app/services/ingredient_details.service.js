@@ -3,6 +3,7 @@ const model = models.ingredientDetail;
 const { ObjectId } = require('mongodb');
 
 exports.create = async (data) => {
+
   const document = await model.findOneAndUpdate(
     data,
     {
@@ -13,11 +14,12 @@ exports.create = async (data) => {
       upsert: true,
     },
   );
+
   return document;
 }
 
 exports.find = async () => {
-  const document = await model.find({}).populate('id_ingredient id_recipe');
+  const document = await model.find({}).populate('id_ingredient');
   return document;
 }
 
@@ -28,10 +30,14 @@ exports.find = async () => {
 //   return document;
 // }
 
-exports.findById = async (id) => {
-  const document = await model.findOne({
-    _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
-  });
+/**
+ * Tìm tất cả các nguyên liệu của công thức có id_recipe = id
+ * 
+ * @param {*} id 
+ * @returns 
+ */
+exports.findByIdRecipe = async (id) => {
+  const document = await model.find({ id_recipe: id }).populate('id_ingredient id_recipe');
   return document;
 }
 

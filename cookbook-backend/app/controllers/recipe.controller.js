@@ -49,7 +49,6 @@ exports.update = async (req, res, next) => {
     res.send(document);
   } catch (error) {
     return next(new apiError(500, " Server Error"));
-
   }
 }
 

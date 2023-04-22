@@ -8,7 +8,7 @@ module.exports = (app) => {
         .post(controller.create)
         .delete(controller.deleteAll);
     router.route('/:id')
-        .get(controller.findById)
+        .get(controller.findByIdRecipe)
         .put(controller.update)
         .delete(controller.delete);
 

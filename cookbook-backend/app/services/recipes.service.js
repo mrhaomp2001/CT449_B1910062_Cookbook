@@ -1,4 +1,4 @@
-const models = require('../models');
+  const models = require('../models');
 const model = models.recipe;
 const Ingredient = models.ingredient;
 const { ObjectId } = require('mongodb');
@@ -18,14 +18,7 @@ exports.create = async (data) => {
 }
 
 exports.find = async () => {
-  const document = await model.find({}).populate({
-    path: "ingredient_details", // Tên trường liên quan trong Recipe model
-    populate:
-    {
-      path: "id_ingredient",
-      model: Ingredient,
-    },
-  });
+  const document = await model.find({}) ;
   return document;
 }
 

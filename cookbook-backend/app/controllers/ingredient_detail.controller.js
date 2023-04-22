@@ -1,5 +1,7 @@
 const services = require("../services");
 const apiError = require("../api-error");
+const { ObjectId } = require('mongodb');
+
 const service = services.ingredientDetail;
 
 exports.create = async (req, res, next) => {
@@ -28,9 +30,9 @@ exports.getAll = async (req, res, next) => {
   }
 }
 
-exports.findById = async (req, res, next) => {
+exports.findByIdRecipe = async (req, res, next) => {
   try {
-    const document = await service.findById(req.params.id);
+    const document = await service.findByIdRecipe(req.params.id);
     if (!document) {
       return next(new apiError(404, " Resouce not found"));
       // res.status(404).send({ message: "Document not found!" });
@@ -48,7 +50,6 @@ exports.update = async (req, res, next) => {
     res.send(document);
   } catch (error) {
     return next(new apiError(500, " Server Error"));
-
   }
 }
 
