@@ -87,6 +87,7 @@
           <div class="row">
             <div class="offset-sm-4 col-sm-8">
               <button type="submit" class="btn btn-primary">Lưu</button>
+              <a @click="deleteRecipe()" class="btn btn-danger mx-2">Xóa công thức</a>
             </div>
           </div>
         </div>
@@ -104,8 +105,19 @@ import ingredientDetailsService from "@/services/ingredientDetails.service";
 import recipeService from "@/services/recipes.service";
 import router from "@/router";
 
-onMounted(() => {
+const props = defineProps({
+  id: { type: String, required: true },
+});
+
+onMounted(async () => {
   retriveAllIngredient();
+  recipeDetails.value = await recipeService.get(props.id);
+  ingredientDetails.value = await ingredientDetailsService.get(props.id);
+
+  ingredientDetails.value.forEach((element) => {
+    element.name = element.id_ingredient.name;
+    element.id = element.id_ingredient._id;
+  });
 });
 
 const recipeDetails = ref({
@@ -123,7 +135,7 @@ const schema = yup.object().shape({
   name: yup.string().required("Không được để rỗng.").min(2, "Phải có ít nhất 2 ký tự.").max(64, "Nhiều nhất 64 ký tự."),
   description: yup.string().required("Không được để rỗng.").min(2, "Phải có ít nhất 2 ký tự.").max(64, "Nhiều nhất 64 ký tự."),
   time: yup.string().required("Không được để rỗng.").min(2, "Phải có ít nhất 2 ký tự.").max(64, "Nhiều nhất 64 ký tự."),
-  content: yup.string().required("Không được để rỗng.").min(2, "Phải có ít nhất 2 ký tự.").max(64, "Nhiều nhất 64 ký tự."),
+  content: yup.string().required("Không được để rỗng.").min(2, "Phải có ít nhất 2 ký tự."),
 });
 
 function addIngredient() {
@@ -134,9 +146,22 @@ function addIngredient() {
   });
 }
 
-function deleteIngredient(index) {
-  ingredientDetails.value.splice(index, 1);
+async function deleteIngredient(index) {
+  if (!ingredientDetails.value[index]._id) {
+    ingredientDetails.value.splice(index, 1);
+  } else {
+    const id = ingredientDetails.value[index]._id;
+    ingredientDetails.value.splice(index, 1);
+    
+    await ingredientDetailsService.delete(id);
+  }
   console.log("Delete");
+}
+
+async function deleteRecipe() {
+  await recipeService.delete(props.id).then(async () => {
+    router.push({ name: "recipe" });
+  });
 }
 
 async function retriveAllIngredient() {
@@ -144,7 +169,7 @@ async function retriveAllIngredient() {
 }
 
 async function save() {
-  savedRecipeDetails.value = await recipeService.create(recipeDetails.value);
+  savedRecipeDetails.value = await recipeService.update(props.id, recipeDetails.value);
   // console.log(savedRecipeDetails);
 
   ingredientDetails.value.forEach(async (element) => {
@@ -154,9 +179,19 @@ async function save() {
       quantity: element.quantity,
     };
 
-    const savedData = await ingredientDetailsService.create(saveData).then(() => {
-      router.push({ name: "recipe" });
-    });
+    /**
+     * savedData: id có nghĩa là id của ingredient, còn _id là id của ingredient details
+     */
+    if (!element._id) {
+      const savedData = await ingredientDetailsService.create(saveData).then(() => {
+        router.push({ name: "recipe" });
+      });
+    } else {
+      const savedData = await ingredientDetailsService.update(element._id, saveData).then(() => {
+        router.push({ name: "recipe" });
+      });
+    }
+
     // console.log(saveData);
   });
 }

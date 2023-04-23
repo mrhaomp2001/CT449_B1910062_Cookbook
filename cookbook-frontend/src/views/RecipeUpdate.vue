@@ -2,17 +2,16 @@
 
 <template>
   <div>
-    <RecipeAddForm />
+    <RecipeUpdateForm :id="props.id" />
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
-import RecipeAddForm from "@/components/recipe/RecipeAddForm.vue";
-const recipe = ref({
-  name: "",
-  description: "",
-  content: "",
-  time: "",
+import RecipeUpdateForm from "@/components/recipe/RecipeUpdateForm.vue";
+
+const props = defineProps({
+  id: { type: String, required: true },
 });
+
 </script>

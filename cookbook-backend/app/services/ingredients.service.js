@@ -1,5 +1,7 @@
 const models = require('../models');
 const model = models.ingredient;
+const modelIngredientDetails = models.ingredientDetail;
+
 const { ObjectId } = require('mongodb');
 
 exports.create = async (data) => {
@@ -47,7 +49,7 @@ exports.update = async (id, payload) => {
     { returnDocument: "after" },
   );
 
-  console.log(payload);
+  // console.log(payload);
   return result;
 }
 
@@ -55,6 +57,7 @@ exports.delete = async (id) => {
   const result = await model.findOneAndDelete({
     _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
   });
+  const other = await modelIngredientDetails.deleteMany({ id_ingredient: id })
   return result;
 }
 

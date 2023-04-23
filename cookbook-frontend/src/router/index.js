@@ -6,11 +6,22 @@ const routes = [
         path: "/",
         name: "recipe",
         component: Recipe,
-    }, 
+    },
     {
         path: "/recipe-add",
-        name: "recipeadd",
+        name: "recipe.add",
         component: RecipeAdd,
+    },
+    {
+        path: "/recipe/:id",
+        name: "recipe.edit",
+        component: () => import("@/views/RecipeUpdate.vue"),
+        props: true // Truyền các biến trong $route.params vào làm props
+    },
+    {
+        path: "/ingredient",
+        name: "ingredient",
+        component: () => import("@/views/Ingredient.vue"),
     },
     {
         path: "/:pathMatch(.*)*",

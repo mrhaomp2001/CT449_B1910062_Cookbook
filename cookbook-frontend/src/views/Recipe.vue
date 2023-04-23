@@ -11,7 +11,7 @@
             <div v-else>Đóng danh sách công thức</div>
           </a>
           <!-- :to="{ name: recipe }" -->
-          <router-link :to="{name: 'recipeadd'}" class="btn btn-success"> <span class="fw-bold">+</span> Thêm công thức mới</router-link>
+          <router-link :to="{name: 'recipe.add'}" class="btn btn-success"> <span class="fw-bold">+</span> Thêm công thức mới</router-link>
         </div>
         <div class="fs-3">Danh sách cách công thức:</div>
         <div v-if="isClosing">Bạn đang đóng sách công thức, ấn vào nút mở danh sách để chọn món bạn muốn nấu</div>

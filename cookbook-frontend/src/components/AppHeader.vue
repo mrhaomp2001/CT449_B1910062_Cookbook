@@ -15,9 +15,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <div class="navbar-nav ms-auto py-0 pe-4">
-            <a href="index.html" class="nav-item nav-link active">Trang chủ</a>
-            <a href="about.html" class="nav-item nav-link">Công thức</a>
-            <a href="service.html" class="nav-item nav-link">Nguyên liệu</a>
+            <router-link :to="{ name: 'recipe' }" class="nav-item nav-link">Trang chủ</router-link>
+            <router-link :to="{ name: 'ingredient' }" class="nav-item nav-link">Nguyên liệu</router-link>
           </div>
         </div>
       </nav>
