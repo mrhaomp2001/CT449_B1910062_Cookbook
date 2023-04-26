@@ -47,6 +47,10 @@ const props = defineProps({
   ingredient: { type: Object },
 });
 
+onMounted(() => {
+  props.ingredient.description = "Nguyên liệu phổ thông";
+});
+
 const emits = defineEmits(["refreshIngredients"]);
 
 function callEmit() {

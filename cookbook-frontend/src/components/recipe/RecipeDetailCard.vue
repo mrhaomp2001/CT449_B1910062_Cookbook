@@ -9,7 +9,7 @@
       </div>
 
       <div class="p-1">
-        <router-link
+        <router-link class="btn btn-info"
           :to="{
             name: 'recipe.edit',
             params: { id: recipe._id },
@@ -20,7 +20,7 @@
 
       <div class="p-1">
         <strong>Miêu tả: </strong>
-        <p style="white-space: pre-line">
+        <p style="white-space: pre-line" class="text-break">
           {{ recipe.description }}
         </p>
       </div>
@@ -38,7 +38,7 @@
       </div>
       <div class="p-1">
         <strong>Thực hiện: </strong>
-        <p style="white-space: pre" class="text-break">
+        <p style="white-space: pre-line" class="text-break">
           {{ recipe.content }}
         </p>
       </div>

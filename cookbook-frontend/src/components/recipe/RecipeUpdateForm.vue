@@ -133,7 +133,7 @@ const listIngredients = ref();
 
 const schema = yup.object().shape({
   name: yup.string().required("Không được để rỗng.").min(2, "Phải có ít nhất 2 ký tự.").max(64, "Nhiều nhất 64 ký tự."),
-  description: yup.string().required("Không được để rỗng.").min(2, "Phải có ít nhất 2 ký tự.").max(64, "Nhiều nhất 64 ký tự."),
+  description: yup.string().required("Không được để rỗng.").min(2, "Phải có ít nhất 2 ký tự.").max(1024, "Nhiều nhất 1024 ký tự."),
   time: yup.string().required("Không được để rỗng.").min(2, "Phải có ít nhất 2 ký tự.").max(64, "Nhiều nhất 64 ký tự."),
   content: yup.string().required("Không được để rỗng.").min(2, "Phải có ít nhất 2 ký tự."),
 });
