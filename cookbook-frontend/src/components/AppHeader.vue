@@ -4,7 +4,7 @@
     <div class="container-fluid position-relative p-0">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <router-link :to="{ name: 'recipe' }" class="text-decoration-none">
-          <h1 class="text-primary m-0 text-decoration-none">
+          <h1 class="text-primary m-0 text-decoration-none mx-2">
             <i class="fa fa-utensils me-3 text-decoration-none"></i>
             Hôm nay ăn gì?
           </h1>

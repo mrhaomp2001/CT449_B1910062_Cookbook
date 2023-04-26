@@ -2,6 +2,7 @@
   <div>
     <div class="container">
       <div class="fs-2 text-uppercase fw-bold text-center">Chuẩn bị nguyên liệu</div>
+      <div class="fs-6 fst-italic text-center">Các nguyên liệu thường dùng trong các món ăn</div>
 
       <div class="row">
         <div class="col-6">

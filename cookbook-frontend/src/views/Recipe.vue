@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <div class="fs-2 text-uppercase fw-bold text-center">Sách nấu ăn</div>
+    <div class="fs-2 text-uppercase fw-bold text-center">Sách nấu ăn điện tử</div>
     <div class="tab-content row">
       <div class="tab-pane fade show active my-3 col-md-6">
         <div class="d-flex justify-content-end mb-2">
